@@ -28,8 +28,8 @@ async function ghApi(pathname) {
 }
 
 // Download a URL (following redirects) with a hard size cap. Returns a Buffer.
-async function downloadCapped(url, maxBytes) {
-  const res = await fetch(url, { headers: ghHeaders(), redirect: 'follow' });
+async function downloadCapped(url, maxBytes, extraHeaders = {}) {
+  const res = await fetch(url, { headers: { ...ghHeaders(), ...extraHeaders }, redirect: 'follow' });
   if (!res.ok) throw new Error(`download ${url}: ${res.status}`);
   const reader = res.body.getReader();
   const chunks = [];

@@ -51,9 +51,12 @@ in `.tgz` or `.tar.gz` — a tarball of the extension tree with `extension.json`
 at its root:
 
 ```sh
-tar -czf extension.tgz --exclude .git --exclude .github --exclude node_modules --exclude data .
-gh release create v1.0.0 extension.tgz --title "v1.0.0"
+tar -czf /tmp/extension.tgz --exclude .git --exclude .github --exclude node_modules --exclude data .
+gh release create v1.0.0 /tmp/extension.tgz --title "v1.0.0"
 ```
+
+(The archive must be written *outside* the tree being packed, or GNU tar exits
+1 with "file changed as we read it".)
 
 Or automate it — drop this in `.github/workflows/release.yml` and publishing
 becomes `git tag v1.0.1 && git push --tags`:
@@ -70,8 +73,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: tar -czf extension.tgz --exclude .git --exclude .github --exclude node_modules --exclude data .
-      - run: gh release create "$GITHUB_REF_NAME" extension.tgz --title "$GITHUB_REF_NAME"
+      - run: tar -czf /tmp/extension.tgz --exclude .git --exclude .github --exclude node_modules --exclude data .
+      - run: gh release create "$GITHUB_REF_NAME" /tmp/extension.tgz --title "$GITHUB_REF_NAME"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```

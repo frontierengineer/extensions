@@ -86,7 +86,9 @@ async function processListing(listing, prior, blocklist) {
     const asset = assets[0];
     console.error(`[index] scanning ${listing.id}@${parsed.version} (${asset.name})`);
     try {
-      const buf = await downloadCapped(asset.browser_download_url, SCAN_LIMITS.compressedBytes);
+      // The asset API URL + octet-stream works for public AND private repos
+      // (browser_download_url 404s on private without a session).
+      const buf = await downloadCapped(asset.url, SCAN_LIMITS.compressedBytes, { accept: 'application/octet-stream' });
       const tmp = path.join(os.tmpdir(), `frontier-${listing.owner}-${listing.name}-${parsed.version}.tgz`);
       fs.writeFileSync(tmp, buf);
       const scan = await scanTarball(tmp);
@@ -100,6 +102,9 @@ async function processListing(listing, prior, blocklist) {
         version: parsed.version,
         tag: release.tag_name,
         tarball: asset.browser_download_url,
+        // API endpoint for the same asset — the URL clients must use (with a
+        // token + octet-stream accept) while the source repo is private.
+        assetApiUrl: asset.url,
         sha256: sha256(buf),
         size: buf.length,
         publishedAt: release.published_at,
