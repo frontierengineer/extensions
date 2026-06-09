@@ -1,0 +1,7 @@
+{
+  "schema": 1,
+  "comment": "The kill switch. Frontier instances fetch this at boot, periodically, and before every install. Listed extensions are blocked from install and auto-disabled where already installed; listed publishers cannot list anything. Removed ids stay here forever — names are never reclaimable. Edited by registry admins only; PRs touching this file never auto-merge.",
+  "extensions": [],
+  "publishers": [],
+  "reserved": []
+}

@@ -1,0 +1,51 @@
+# Rebuild index.json: poll listed repos for new releases, scan every unseen
+# version, pin its sha256. Scheduled so publishing a new version is just
+# "cut a GitHub release" — it appears in the index within the polling
+# interval, after passing the scan.
+name: index
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'listings/**'
+      - 'blocklist.json'
+      - 'scripts/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: index
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build index
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: enables the LLM review pass on each new version.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/build-index.js
+
+      - name: Commit index
+        run: |
+          if git diff --quiet index.json; then
+            echo "index unchanged"
+            exit 0
+          fi
+          git config user.name "frontier-registry-bot"
+          git config user.email "registry@frontierengineer.com"
+          git add index.json
+          git commit -m "index: rebuild"
+          git push

@@ -1,0 +1,60 @@
+# Open submission, no human gate: a listing PR that passes mechanical
+# validation is merged automatically. pull_request_target is required so the
+# job has write permissions on fork PRs — and is safe here because ONLY the
+# base branch's scripts are executed; the PR checkout is read as data.
+name: validate-listing
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: validate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout trusted base
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+
+      - name: Checkout PR (data only — never executed)
+        uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ github.event.pull_request.number }}/merge
+          path: pr
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate listing
+        id: validate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/validate-listing.js --pr-dir pr --author "${{ github.event.pull_request.user.login }}"
+
+      - name: Auto-merge
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --squash --admin
+          # Merges by GITHUB_TOKEN don't fire push-triggered workflows, so
+          # kick the indexer explicitly to pick up the new listing.
+          gh workflow run index.yml --repo ${{ github.repository }}
+
+      - name: Explain failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --body \
+            "Automated validation failed — see the [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for the reason. Fix and push again; passing PRs merge automatically with no human review."
