@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-09T22:58:17.223Z",
+  "generated": "2026-06-09T22:59:41.049Z",
   "extensions": [
     {
       "id": "frontierengineer/hello-frontier",
