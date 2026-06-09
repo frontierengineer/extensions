@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "registry": "frontierengineer/extensions",
+  "generated": "2026-06-09T22:40:45.259Z",
+  "extensions": [
+    {
+      "id": "frontierengineer/hello-frontier",
+      "owner": "frontierengineer",
+      "name": "hello-frontier",
+      "repo": "frontierengineer/hello-frontier",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "tarball": "https://github.com/frontierengineer/hello-frontier/releases/download/v1.0.0/extension.tgz",
+          "sha256": "809432e2b3aa8ccaf1006d269a803ec2c7419b8fffe3a89cc94973e499bbaddb",
+          "size": 1122,
+          "publishedAt": "2026-06-09T22:40:35Z",
+          "scannedAt": "2026-06-09T22:40:45.258Z",
+          "flags": []
+        }
+      ],
+      "rejected": [],
+      "repoUrl": "https://github.com/frontierengineer/hello-frontier",
+      "stars": 0,
+      "displayName": "Hello Frontier",
+      "description": "A tiny UI-only extension that exists to prove the marketplace round trip: repo → release → scan → index → install.",
+      "defaultColor": "#4f9cf9",
+      "capabilities": {
+        "ui": true,
+        "mcp": false,
+        "hooks": false,
+        "workspace": false,
+        "runtime": false
+      },
+      "serverCode": false,
+      "dependencies": 2,
+      "latest": "1.0.0"
+    }
+  ]
+}
