@@ -46,7 +46,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr merge ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --squash --admin
+          gh pr merge ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --squash
           # Merges by GITHUB_TOKEN don't fire push-triggered workflows, so
           # kick the indexer explicitly to pick up the new listing.
           gh workflow run index.yml --repo ${{ github.repository }}
