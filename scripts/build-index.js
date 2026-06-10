@@ -118,6 +118,7 @@ async function processListing(listing, prior, blocklist) {
       entry.capabilities = scan.capabilities;
       entry.serverCode = scan.serverCode;
       entry.dependencies = scan.dependencies;
+      entry.networkHosts = scan.networkHosts;
       console.error(`[index]   accepted (${scan.serverCode ? 'server code' : 'ui-only'}, ${scan.dependencies} deps)`);
     } catch (err) {
       entry.rejected.push({ version: parsed.version, reason: err.message, at: new Date().toISOString() });
