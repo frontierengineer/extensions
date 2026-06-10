@@ -14,6 +14,7 @@ Repo layout = extension layout (the same tree Frontier runs from
 
 ```
 extension.json        required: {"displayName": "...", "defaultColor": "#rrggbb", "description": "..."}
+                      optional:  "network": {"allowedHosts": ["api.example.com"]}  — declares outbound fetch targets
 ui/index.tsx          browser UI capability (optional)
 ui/package.json       its deps (optional — fewer is better, zero is best)
 mcp/index.ts          host-side MCP tools (optional — full host access)
@@ -29,6 +30,11 @@ Notes that affect whether your versions pass the scan:
 - **Prefer zero dependencies.** Frontier installs third-party extension deps
   with `npm install --ignore-scripts`, so packages relying on install scripts
   will not work. Vendor what you can.
+- **Declare your network needs.** If your extension calls out to the internet,
+  it must use `services.http.fetch` and declare the hosts in
+  `network.allowedHosts` (or `["*"]` for a fetch-and-render browser). Raw
+  `fetch`/`node:http` is flagged at scan and shown to users as a warning; the
+  declared hosts appear in the install trust dialog.
 - Size caps: 25 MB compressed, 100 MB unpacked, 5000 files.
 
 ## 2. List it (one-time PR, auto-merged)

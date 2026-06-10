@@ -30,6 +30,10 @@ async function scanTarball(tarballPath) {
   for (const s of secrets) errors.push(`secret detected in ${s.file} (${s.pattern})`);
   flags.push(...patternFlags);
 
+  if (Array.isArray(manifest.network?.allowedHosts) && manifest.network.allowedHosts.includes('*')) {
+    flags.push('declares wildcard network access (*) — can reach any external host');
+  }
+
   const review = await llmReview(root, manifest);
   if (review) {
     if (review.verdict === 'malicious') {
@@ -52,6 +56,10 @@ async function scanTarball(tarballPath) {
     serverCode,
     dependencies,
     dependencyNames,
+    // Declared outbound network access — surfaced in the install trust dialog.
+    networkHosts: Array.isArray(manifest.network?.allowedHosts)
+      ? manifest.network.allowedHosts.filter((h) => typeof h === 'string')
+      : [],
     size: stat.size,
   };
 }
