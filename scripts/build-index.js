@@ -155,6 +155,16 @@ async function main() {
     generated: new Date().toISOString(),
     extensions: extensions.filter((e) => e.versions.length > 0 || e.rejected.length > 0),
   };
+
+  // `generated` means "when the content last changed", not "when the scan
+  // last ran" — if nothing but the timestamp would change, leave the file
+  // untouched so the workflow's commit step sees a clean diff and the repo
+  // doesn't accrete a no-op commit every scan interval.
+  const stripGenerated = (i) => JSON.stringify({ ...i, generated: undefined });
+  if (stripGenerated(existing) === stripGenerated(index)) {
+    console.error(`[index] unchanged (${index.extensions.length} extension(s)) — not rewriting index.json`);
+    return;
+  }
   fs.writeFileSync(INDEX_PATH, JSON.stringify(index, null, 2) + '\n');
   console.error(`[index] wrote ${index.extensions.length} extension(s) to index.json`);
 }
