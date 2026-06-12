@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-12T23:32:42.103Z",
+  "generated": "2026-06-12T23:33:35.463Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -81,6 +81,48 @@
       "serverCode": false,
       "dependencies": 2,
       "networkHosts": [],
+      "latest": "1.0.0"
+    },
+    {
+      "id": "frontierengineer/games",
+      "owner": "frontierengineer",
+      "name": "games",
+      "repo": "frontierengineer/extension-games",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v1.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-games/releases/assets/446140520",
+          "sha256": "a24269aa60967fa5040a31f661f5ce1f0b2126deaf246946b581d2efa8e287bb",
+          "size": 57750,
+          "publishedAt": "2026-06-12T23:31:22Z",
+          "scannedAt": "2026-06-12T23:33:35.023Z",
+          "flags": [
+            "obfuscation indicators (base64 decode + exec)",
+            "outbound network calls (fetch / http)",
+            "spawns processes (child_process)"
+          ]
+        }
+      ],
+      "rejected": [],
+      "repoUrl": "https://github.com/frontierengineer/extension-games",
+      "stars": 0,
+      "displayName": "Games",
+      "description": "A retro console emulator (via EmulatorJS) that browses archive.org ROM catalogs and plays games in-browser, including your own ROMs.",
+      "defaultColor": "#ef4444",
+      "capabilities": {
+        "ui": true,
+        "mcp": true,
+        "hooks": false,
+        "workspace": false,
+        "runtime": false
+      },
+      "serverCode": true,
+      "dependencies": 3,
+      "networkHosts": [
+        "archive.org"
+      ],
       "latest": "1.0.0"
     },
     {
