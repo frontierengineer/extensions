@@ -93,6 +93,34 @@ reason is recorded in your extension's `rejected` list in the index.
 does not guarantee byte-stability of generated source archives, and the
 registry pins the exact bytes it scanned. Release assets are immutable.
 
+## Unpublishing and republishing
+
+The listing is the source of truth for what's discoverable — `index.json` is
+generated from `listings/` on every rebuild, so the listing file is the lever.
+
+- **Unpublish** by removing your `listings/<owner>/<name>.json`. On the next
+  index rebuild (the 30-minute poll, or immediately on a listings change) the
+  extension is gone from `index.json` and stops appearing in the Marketplace
+  tab — the indexer only emits entries for extensions still listed. Your repo
+  and releases are untouched; you've just delisted. `scripts/unpublish.js`
+  removes the file for you and prints how to restore it. Open the PR the same
+  way you listed: only the namespace owner (or a public org member) may remove
+  that namespace's listing, and the bot enforces it.
+- **Republish** by restoring the listing file (`{"repo": "<owner>/<repo>"}`,
+  same as before). The next rebuild re-scans the repo's releases and the
+  extension reappears with its versions. Nothing about the releases needs to
+  change — the listing coming back is enough.
+- **Pull a single bad version.** Unpublishing and republishing is a whole-
+  extension switch; the index never *un*-pins a version it already accepted
+  (it only appends), so deleting a GitHub release does not retract it. To stop
+  a specific compromised version reaching machines, the kill switch is
+  [`blocklist.json`](blocklist.json): an admin adds the extension id (with a
+  reason), instances poll it, and the extension is barred from install and
+  auto-disabled where present — fleet-wide, within the polling interval. The
+  blocklist is admin-only and its PRs never auto-merge; report via the channels
+  in the [README](README.md). Then publish a fixed higher version the normal
+  way.
+
 ## Sharing without the registry
 
 The registry is the discoverable path, not the only one. Frontier can install
