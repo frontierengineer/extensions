@@ -1,6 +1,69 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-12T23:12:01.287Z",
-  "extensions": []
+  "generated": "2026-06-12T23:16:49.813Z",
+  "extensions": [
+    {
+      "id": "frontierengineer/hello-world",
+      "owner": "frontierengineer",
+      "name": "hello-world",
+      "repo": "frontierengineer/extension-hello-world",
+      "versions": [
+        {
+          "version": "1.1.0",
+          "tag": "v1.1.0",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v1.1.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/446124840",
+          "sha256": "ab28093d9c0d3a72c19018f0fce11bb7117f27918517477fdde8d7f425728a33",
+          "size": 53120,
+          "publishedAt": "2026-06-12T23:11:54Z",
+          "scannedAt": "2026-06-12T23:16:49.532Z",
+          "flags": [
+            "obfuscation indicators (base64 decode + exec)",
+            "outbound network calls (fetch / http)",
+            "spawns processes (child_process)"
+          ]
+        },
+        {
+          "version": "1.0.1",
+          "tag": "v1.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v1.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/443129241",
+          "sha256": "fdccf9028b17cab45a32ace5ec3e8e04bba05a69411a0bbaaa6f2fecff11a792",
+          "size": 1120,
+          "publishedAt": "2026-06-09T22:57:08Z",
+          "scannedAt": "2026-06-12T23:16:49.656Z",
+          "flags": []
+        },
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v1.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/443120487",
+          "sha256": "809432e2b3aa8ccaf1006d269a803ec2c7419b8fffe3a89cc94973e499bbaddb",
+          "size": 1122,
+          "publishedAt": "2026-06-09T22:40:35Z",
+          "scannedAt": "2026-06-12T23:16:49.813Z",
+          "flags": []
+        }
+      ],
+      "rejected": [],
+      "repoUrl": "https://github.com/frontierengineer/extension-hello-world",
+      "stars": 0,
+      "displayName": "Hello Frontier",
+      "description": "A tiny UI-only extension that exists to prove the marketplace round trip: repo → release → scan → index → install.",
+      "defaultColor": "#4f9cf9",
+      "capabilities": {
+        "ui": true,
+        "mcp": false,
+        "hooks": false,
+        "workspace": false,
+        "runtime": false
+      },
+      "serverCode": false,
+      "dependencies": 2,
+      "networkHosts": [],
+      "latest": "1.1.0"
+    }
+  ]
 }
