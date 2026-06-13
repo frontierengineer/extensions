@@ -41,14 +41,20 @@ function loadExistingIndex() {
 }
 
 async function processListing(listing, prior, blocklist) {
-  const entry = prior || {
-    id: listing.id,
-    owner: listing.owner,
-    name: listing.name,
-    repo: listing.repo,
-    versions: [],
-    rejected: [],
-  };
+  // Deep-copy the prior entry: it lives inside `existing`, and mutating it in
+  // place would make the end-of-run "did anything change?" diff compare the
+  // already-mutated existing against the new index — so newly accepted
+  // versions of an already-listed extension would never get written.
+  const entry = prior
+    ? JSON.parse(JSON.stringify(prior))
+    : {
+        id: listing.id,
+        owner: listing.owner,
+        name: listing.name,
+        repo: listing.repo,
+        versions: [],
+        rejected: [],
+      };
   entry.repo = listing.repo;
 
   const repoInfo = await ghApi(`/repos/${listing.repo}`);
