@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-12T23:33:35.463Z",
+  "generated": "2026-06-13T00:40:17.476Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -9,6 +9,17 @@
       "name": "canvas",
       "repo": "frontierengineer/extension-canvas",
       "versions": [
+        {
+          "version": "1.0.1",
+          "tag": "v1.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-canvas/releases/download/v1.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-canvas/releases/assets/446193114",
+          "sha256": "1ac85c23821b4c5a94bda9cd340423786c4a56d3a7b3c9fcc82f6d81e4d04f6b",
+          "size": 18960,
+          "publishedAt": "2026-06-13T00:37:29Z",
+          "scannedAt": "2026-06-13T00:40:15.212Z",
+          "flags": []
+        },
         {
           "version": "1.0.0",
           "tag": "v1.0.0",
@@ -41,7 +52,7 @@
       "serverCode": false,
       "dependencies": 3,
       "networkHosts": [],
-      "latest": "1.0.0"
+      "latest": "1.0.1"
     },
     {
       "id": "frontierengineer/directory-sync",
@@ -49,6 +60,17 @@
       "name": "directory-sync",
       "repo": "frontierengineer/extension-directory-sync",
       "versions": [
+        {
+          "version": "1.0.1",
+          "tag": "v1.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-directory-sync/releases/download/v1.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-directory-sync/releases/assets/446193270",
+          "sha256": "14dfaa760d15a43c2c8c63b526f30c6c0cf50d79b3c5420ea6ce01b92f408821",
+          "size": 18580,
+          "publishedAt": "2026-06-13T00:37:36Z",
+          "scannedAt": "2026-06-13T00:40:15.908Z",
+          "flags": []
+        },
         {
           "version": "1.0.0",
           "tag": "v1.0.0",
@@ -81,7 +103,7 @@
       "serverCode": false,
       "dependencies": 2,
       "networkHosts": [],
-      "latest": "1.0.0"
+      "latest": "1.0.1"
     },
     {
       "id": "frontierengineer/games",
@@ -89,6 +111,20 @@
       "name": "games",
       "repo": "frontierengineer/extension-games",
       "versions": [
+        {
+          "version": "1.0.1",
+          "tag": "v1.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v1.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-games/releases/assets/446193106",
+          "sha256": "20ba3214d1589fe59370205229b0c825ab775655dd55fb461031bbc31a56efa0",
+          "size": 19029,
+          "publishedAt": "2026-06-13T00:37:26Z",
+          "scannedAt": "2026-06-13T00:40:16.839Z",
+          "flags": [
+            "obfuscation indicators (base64 decode + exec)",
+            "outbound network calls (fetch / http)"
+          ]
+        },
         {
           "version": "1.0.0",
           "tag": "v1.0.0",
@@ -123,7 +159,7 @@
       "networkHosts": [
         "archive.org"
       ],
-      "latest": "1.0.0"
+      "latest": "1.0.1"
     },
     {
       "id": "frontierengineer/hello-world",
@@ -131,6 +167,17 @@
       "name": "hello-world",
       "repo": "frontierengineer/extension-hello-world",
       "versions": [
+        {
+          "version": "1.1.1",
+          "tag": "v1.1.1",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v1.1.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/446193082",
+          "sha256": "e11490808f381908f823389481c454859ab4861b1781c3c906d6c9c31738161b",
+          "size": 15645,
+          "publishedAt": "2026-06-13T00:37:20Z",
+          "scannedAt": "2026-06-13T00:40:17.459Z",
+          "flags": []
+        },
         {
           "version": "1.1.0",
           "tag": "v1.1.0",
@@ -172,20 +219,20 @@
       "rejected": [],
       "repoUrl": "https://github.com/frontierengineer/extension-hello-world",
       "stars": 0,
-      "displayName": "Hello Frontier",
-      "description": "A tiny UI-only extension that exists to prove the marketplace round trip: repo → release → scan → index → install.",
-      "defaultColor": "#4f9cf9",
+      "displayName": "Hello World",
+      "description": "The reference Frontier extension — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, Hooks, and the worker-channel fan-out.",
+      "defaultColor": "#14b8a6",
       "capabilities": {
         "ui": true,
-        "mcp": false,
-        "hooks": false,
+        "mcp": true,
+        "hooks": true,
         "workspace": false,
         "runtime": false
       },
-      "serverCode": false,
+      "serverCode": true,
       "dependencies": 2,
       "networkHosts": [],
-      "latest": "1.1.0"
+      "latest": "1.1.1"
     }
   ]
 }
