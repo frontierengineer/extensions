@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-13T00:40:17.476Z",
+  "generated": "2026-06-13T01:30:06.833Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -168,6 +168,17 @@
       "repo": "frontierengineer/extension-hello-world",
       "versions": [
         {
+          "version": "1.1.2",
+          "tag": "v1.1.2",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v1.1.2/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/446197140",
+          "sha256": "402d46de68924d74036aee068d8cbd254e139e5ee453a9729b1b2934a55c40fd",
+          "size": 15557,
+          "publishedAt": "2026-06-13T00:44:49Z",
+          "scannedAt": "2026-06-13T01:30:06.810Z",
+          "flags": []
+        },
+        {
           "version": "1.1.1",
           "tag": "v1.1.1",
           "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v1.1.1/extension.tgz",
@@ -232,7 +243,7 @@
       "serverCode": true,
       "dependencies": 2,
       "networkHosts": [],
-      "latest": "1.1.1"
+      "latest": "1.1.2"
     }
   ]
 }
