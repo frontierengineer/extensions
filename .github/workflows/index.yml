@@ -52,4 +52,13 @@ jobs:
           git config user.email "registry@frontierengineer.com"
           git add index.json
           git commit -m "index: rebuild"
-          git push
+          # Concurrent runs (schedule + push + dispatch) can each rebuild and
+          # race on push; rebase onto whatever landed first, preferring our
+          # freshly-built index, and retry rather than failing the run.
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase -X ours origin main || git rebase --abort
+            sleep $((attempt * 3))
+          done
+          echo "index push lost the race after retries; the next run will reconcile"
+          exit 0
