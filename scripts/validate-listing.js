@@ -13,7 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const {
-  ghApi, EXTENSION_NAME_RE, normalizeName, editDistance, loadListings, loadBlocklist,
+  ghApi, APPLICATION_NAME_RE, normalizeName, editDistance, loadListings, loadBlocklist,
 } = require('./lib');
 
 const REPO_ROOT = path.join(__dirname, '..');
@@ -56,12 +56,12 @@ async function main() {
   for (const f of deleted) {
     const [, owner] = LISTING_RE.exec(f);
     if (owner.toLowerCase() !== author.toLowerCase() && !(await isPublicOrgMember(owner, author))) {
-      fail(`${f}: only ${owner} can delist their own extension`);
+      fail(`${f}: only ${owner} can delist their own application`);
     }
   }
 
   const blocklist = loadBlocklist(REPO_ROOT);
-  const blockedIds = new Set(blocklist.extensions.map((e) => (typeof e === 'string' ? e : e.id)).map((s) => s.toLowerCase()));
+  const blockedIds = new Set(blocklist.applications.map((e) => (typeof e === 'string' ? e : e.id)).map((s) => s.toLowerCase()));
   const blockedPublishers = new Set(blocklist.publishers.map((p) => (typeof p === 'string' ? p : p.owner)).map((s) => s.toLowerCase()));
   const reserved = new Set((blocklist.reserved || []).map((s) => s.toLowerCase()));
   const existing = loadListings(REPO_ROOT);
@@ -70,7 +70,7 @@ async function main() {
     const [, owner, name] = LISTING_RE.exec(f);
     const id = `${owner}/${name}`;
 
-    if (!EXTENSION_NAME_RE.test(name)) fail(`${id}: name must match ${EXTENSION_NAME_RE}`);
+    if (!APPLICATION_NAME_RE.test(name)) fail(`${id}: name must match ${APPLICATION_NAME_RE}`);
     if (blockedPublishers.has(owner.toLowerCase())) fail(`${id}: publisher "${owner}" is blocklisted`);
     if (blockedIds.has(id.toLowerCase())) fail(`${id}: this id was removed from the registry and is permanently reserved`);
     if (reserved.has(id.toLowerCase()) || reserved.has(name.toLowerCase())) fail(`${id}: name is reserved`);
@@ -91,7 +91,7 @@ async function main() {
       fail(`${id}: listing must be {"repo": "<owner>/<repo>"}`);
     }
     const extraKeys = Object.keys(listing).filter((k) => k !== 'repo');
-    if (extraKeys.length) fail(`${id}: unknown listing keys: ${extraKeys.join(', ')} (metadata comes from the scanned extension.json, not the listing)`);
+    if (extraKeys.length) fail(`${id}: unknown listing keys: ${extraKeys.join(', ')} (metadata comes from the scanned application.json, not the listing)`);
 
     const repoInfo = await ghApi(`/repos/${listing.repo}`);
     if (!repoInfo) fail(`${id}: repo ${listing.repo} does not exist or is private`);
@@ -100,7 +100,7 @@ async function main() {
     }
 
     // Typosquat guard: a NEW name may not be confusably close to any existing
-    // extension owned by someone else. Same-owner updates are exempt.
+    // application owned by someone else. Same-owner updates are exempt.
     const isNew = !existing.some((e) => e.id === id);
     if (isNew) {
       const norm = normalizeName(name);
@@ -108,7 +108,7 @@ async function main() {
         if (other.owner.toLowerCase() === owner.toLowerCase()) continue;
         const otherNorm = normalizeName(other.name);
         if (norm === otherNorm || editDistance(norm, otherNorm) <= 1) {
-          fail(`${id}: name is confusably similar to existing extension ${other.id}`);
+          fail(`${id}: name is confusably similar to existing application ${other.id}`);
         }
       }
     }
