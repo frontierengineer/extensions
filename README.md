@@ -1,10 +1,10 @@
-# Frontier Extension Registry
+# Frontier Application Registry
 
-The open extension registry for [Frontier](https://frontierengineer.com). Anyone
+The open application registry for [Frontier](https://frontierengineer.com). Anyone
 can publish; nobody hand-reviews your listing. Trust comes from automation, not
 gatekeeping:
 
-- **Identity is your GitHub identity.** An extension id is `<owner>/<name>`,
+- **Identity is your GitHub identity.** An application id is `<owner>/<name>`,
   where `<owner>` is the GitHub account or org that owns the source repo.
   Impersonating a publisher means compromising their GitHub account. There are
   no registry accounts and no publish tokens to leak.
@@ -16,7 +16,7 @@ gatekeeping:
   tarball that was scanned. Clients verify it at install time, so an artifact
   can't be swapped after scanning.
 - **The kill switch is [`blocklist.json`](blocklist.json).** Frontier instances
-  poll it; a blocklisted extension is barred from install and auto-disabled on
+  poll it; a blocklisted application is barred from install and auto-disabled on
   machines that already have it. Removed ids are reserved forever — a banned
   name can't be re-registered.
 - **Trust signals, not gates.** The Frontier marketplace UI shows what a
@@ -31,34 +31,34 @@ install:  Frontier ──reads──▶ index.json ──fetch+verify──▶ y
 moderate: report ──▶ admin adds to blocklist.json ──▶ fleet auto-disables
 ```
 
-1. **[`listings/`](listings/)** — one file per extension:
+1. **[`listings/`](listings/)** — one file per application:
    `listings/<owner>/<name>.json` containing `{"repo": "<owner>/<repo>"}`.
    Added via PR; a bot validates (namespace ownership, name rules, typosquat
    distance, repo existence) and **auto-merges** — no human review.
 2. **[`index.json`](index.json)** — generated. The indexer polls every listed
    repo's GitHub releases (every 30 minutes), scans unseen versions, and adds
    the ones that pass with a pinned hash. Rejections are recorded per
-   extension with the reason, so publishers can see why a version didn't land.
+   application with the reason, so publishers can see why a version didn't land.
 3. **[`blocklist.json`](blocklist.json)** — hand-edited by registry admins in
    response to reports. PRs touching it never auto-merge.
 
 ## Publishing
 
-See [PUBLISHING.md](PUBLISHING.md). Short version: put your extension in a
+See [PUBLISHING.md](PUBLISHING.md). Short version: put your application in a
 public GitHub repo, cut a release `vX.Y.Z` with a single `.tgz` asset of the
-extension tree, and PR one small JSON file into `listings/<you>/<name>.json`.
+application tree, and PR one small JSON file into `listings/<you>/<name>.json`.
 Updates after that are just new releases — no further PRs.
 
-## Reporting a malicious extension
+## Reporting a malicious application
 
 Open an issue with the `abuse` label, or email security@frontierengineer.com.
-Confirmed-malicious extensions are blocklisted (which disables them fleet-wide
+Confirmed-malicious applications are blocklisted (which disables them fleet-wide
 within the polling interval), their publisher is banned, and the removal is
 recorded publicly in the blocklist with a reason.
 
 ## Threat model, stated plainly
 
-This registry accepts that **a malicious extension can be listed and can run
+This registry accepts that **a malicious application can be listed and can run
 on installing machines until it is reported** — the same line the VS Code
 Marketplace accepts. What it refuses: install-time code execution (Frontier
 installs third-party deps with `--ignore-scripts`), silent artifact swaps

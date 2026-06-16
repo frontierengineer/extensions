@@ -1,7 +1,7 @@
 'use strict';
-// Scan one extension tarball. Used by build-index.js for every new version
+// Scan one application tarball. Used by build-index.js for every new version
 // before it enters the index, and runnable standalone:
-//   node scripts/scan-version.js path/to/extension.tgz
+//   node scripts/scan-version.js path/to/application.tgz
 //
 // A version is publishable only when this scan passes. Errors block; flags
 // are advisory and shown to users at install time.
