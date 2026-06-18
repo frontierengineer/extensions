@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/applications",
-  "generated": "2026-06-16T03:47:00.939Z",
+  "generated": "2026-06-18T09:54:25.362Z",
   "applications": [
     {
       "id": "frontierengineer/canvas",
@@ -22,7 +22,7 @@
         }
       ],
       "rejected": [],
-      "repoUrl": "https://github.com/frontierengineer/application-canvas",
+      "repoUrl": "https://github.com/frontierengineer/extension-canvas",
       "stars": 0,
       "displayName": "Canvas",
       "description": "An infinite zoomable whiteboard of draggable post-its and colored areas for spatial planning and freeform notes.",
@@ -58,7 +58,7 @@
         }
       ],
       "rejected": [],
-      "repoUrl": "https://github.com/frontierengineer/application-directory-sync",
+      "repoUrl": "https://github.com/frontierengineer/extension-directory-sync",
       "stars": 0,
       "displayName": "Directory Sync",
       "description": "One-way mirrors between directories on your machines: each pair scans its source on an interval (or on demand) and copies changes to the target, deleting target files the source no longer has.",
@@ -97,7 +97,7 @@
         }
       ],
       "rejected": [],
-      "repoUrl": "https://github.com/frontierengineer/application-games",
+      "repoUrl": "https://github.com/frontierengineer/extension-games",
       "stars": 0,
       "displayName": "Games",
       "description": "A retro console emulator (via EmulatorJS) that browses archive.org ROM catalogs and plays games in-browser, including your own ROMs.",
@@ -135,7 +135,7 @@
         }
       ],
       "rejected": [],
-      "repoUrl": "https://github.com/frontierengineer/application-hello-world",
+      "repoUrl": "https://github.com/frontierengineer/extension-hello-world",
       "stars": 0,
       "displayName": "Hello World",
       "description": "The reference Frontier application — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, Hooks, and the worker-channel fan-out.",
