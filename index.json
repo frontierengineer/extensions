@@ -1,19 +1,19 @@
 {
   "schema": 1,
-  "registry": "frontierengineer/applications",
-  "generated": "2026-06-18T09:54:25.362Z",
-  "applications": [
+  "registry": "frontierengineer/extensions",
+  "generated": "2026-06-16T03:47:00.939Z",
+  "extensions": [
     {
       "id": "frontierengineer/canvas",
       "owner": "frontierengineer",
       "name": "canvas",
-      "repo": "frontierengineer/application-canvas",
+      "repo": "frontierengineer/extension-canvas",
       "versions": [
         {
           "version": "2.0.0",
           "tag": "v2.0.0",
-          "tarball": "https://github.com/frontierengineer/application-canvas/releases/download/v2.0.0/application.tgz",
-          "assetApiUrl": "https://api.github.com/repos/frontierengineer/application-canvas/releases/assets/448815839",
+          "tarball": "https://github.com/frontierengineer/extension-canvas/releases/download/v2.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-canvas/releases/assets/448815839",
           "sha256": "66489b27c72a4fd1f761b77b9aabe505c802b3a760db1e1eec1f9c25517e7ac1",
           "size": 19965,
           "publishedAt": "2026-06-16T03:41:11Z",
@@ -43,13 +43,13 @@
       "id": "frontierengineer/directory-sync",
       "owner": "frontierengineer",
       "name": "directory-sync",
-      "repo": "frontierengineer/application-directory-sync",
+      "repo": "frontierengineer/extension-directory-sync",
       "versions": [
         {
           "version": "2.0.0",
           "tag": "v2.0.0",
-          "tarball": "https://github.com/frontierengineer/application-directory-sync/releases/download/v2.0.0/application.tgz",
-          "assetApiUrl": "https://api.github.com/repos/frontierengineer/application-directory-sync/releases/assets/448815830",
+          "tarball": "https://github.com/frontierengineer/extension-directory-sync/releases/download/v2.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-directory-sync/releases/assets/448815830",
           "sha256": "44cde45d606c81e0bfe4bbfdc9303ae9a1b4f2b5f19e87e9fbe22776c5722bc1",
           "size": 19213,
           "publishedAt": "2026-06-16T03:41:10Z",
@@ -79,13 +79,13 @@
       "id": "frontierengineer/games",
       "owner": "frontierengineer",
       "name": "games",
-      "repo": "frontierengineer/application-games",
+      "repo": "frontierengineer/extension-games",
       "versions": [
         {
           "version": "2.0.0",
           "tag": "v2.0.0",
-          "tarball": "https://github.com/frontierengineer/application-games/releases/download/v2.0.0/application.tgz",
-          "assetApiUrl": "https://api.github.com/repos/frontierengineer/application-games/releases/assets/448815812",
+          "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v2.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-games/releases/assets/448815812",
           "sha256": "c521c53e7959c036d5803cb9f0322c3f343847acdf8fc67f2fdbd6a2a3feebbf",
           "size": 19858,
           "publishedAt": "2026-06-16T03:41:08Z",
@@ -120,13 +120,13 @@
       "id": "frontierengineer/hello-world",
       "owner": "frontierengineer",
       "name": "hello-world",
-      "repo": "frontierengineer/application-hello-world",
+      "repo": "frontierengineer/extension-hello-world",
       "versions": [
         {
           "version": "2.0.0",
           "tag": "v2.0.0",
-          "tarball": "https://github.com/frontierengineer/application-hello-world/releases/download/v2.0.0/application.tgz",
-          "assetApiUrl": "https://api.github.com/repos/frontierengineer/application-hello-world/releases/assets/448815761",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v2.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/448815761",
           "sha256": "511dcfb944c840b0fd3cc6730df3270c8f1cd303ba8283873522113b76992c02",
           "size": 15628,
           "publishedAt": "2026-06-16T03:41:04Z",
@@ -138,7 +138,7 @@
       "repoUrl": "https://github.com/frontierengineer/extension-hello-world",
       "stars": 0,
       "displayName": "Hello World",
-      "description": "The reference Frontier application — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, Hooks, and the worker-channel fan-out.",
+      "description": "The reference Frontier extension — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, Hooks, and the worker-channel fan-out.",
       "defaultColor": "#14b8a6",
       "capabilities": {
         "ui": true,

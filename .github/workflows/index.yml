@@ -33,7 +33,7 @@ jobs:
 
       - name: Build index
         env:
-          # The indexer reads every listed application's OWN repo (metadata,
+          # The indexer reads every listed extension's OWN repo (metadata,
           # releases, release assets). The default GITHUB_TOKEN is scoped to
           # this repo and 404s on siblings, so use a token with public-repo
           # read; falls back to the default token if the secret is unset.
