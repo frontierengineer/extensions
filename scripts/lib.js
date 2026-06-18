@@ -14,7 +14,7 @@ const GITHUB_API = 'https://api.github.com';
 function ghHeaders() {
   const h = {
     accept: 'application/vnd.github+json',
-    'user-agent': 'frontier-applications-registry',
+    'user-agent': 'frontier-extensions-registry',
   };
   if (process.env.GITHUB_TOKEN) h.authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
   return h;
@@ -51,7 +51,7 @@ function sha256(buf) {
   return crypto.createHash('sha256').update(buf).digest('hex');
 }
 
-const APPLICATION_NAME_RE = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/;
+const EXTENSION_NAME_RE = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/;
 
 // Confusable-aware normalisation for typosquat checks: lowercase, common
 // leetspeak substitutions, separators stripped. "he11o-fr0ntier" and
@@ -85,7 +85,7 @@ function loadBlocklist(repoRoot) {
   try {
     return loadJson(path.join(repoRoot, 'blocklist.json'));
   } catch {
-    return { schema: 1, applications: [], publishers: [], reserved: [] };
+    return { schema: 1, extensions: [], publishers: [], reserved: [] };
   }
 }
 
@@ -113,14 +113,14 @@ const SCAN_LIMITS = {
   fileCount: 5000,
 };
 
-// Capability dirs whose presence means the application ships that surface.
+// Capability dirs whose presence means the extension ships that surface.
 // mcp/hooks/workspace run IN the host process; runtime runs on the worker —
 // all four are "server code" for trust purposes. ui runs in the browser.
 const CAPABILITY_DIRS = ['ui', 'mcp', 'hooks', 'workspace', 'runtime'];
 const SERVER_CAPABILITIES = new Set(['mcp', 'hooks', 'workspace', 'runtime']);
 
 // Safely unpack a tarball into a fresh temp dir and inspect it as a Frontier
-// application. Rejects path traversal, links, oversize archives. Returns
+// extension. Rejects path traversal, links, oversize archives. Returns
 // { dir, root, manifest, capabilities, serverCode, dependencies, fileCount, unpackedBytes }.
 function inspectTarball(tarballPath) {
   const listing = execFileSync('tar', ['-tzvf', tarballPath], { encoding: 'utf-8', maxBuffer: 64 * 1024 * 1024 });
@@ -140,20 +140,20 @@ function inspectTarball(tarballPath) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'frontier-scan-'));
   execFileSync('tar', ['-xzf', tarballPath, '-C', dir]);
 
-  // application.json must be at the archive root, or inside exactly one
+  // extension.json must be at the archive root, or inside exactly one
   // top-level directory (the layout `tar -czf` of a parent dir produces).
   let root = dir;
-  if (!fs.existsSync(path.join(root, 'application.json'))) {
+  if (!fs.existsSync(path.join(root, 'extension.json'))) {
     const top = fs.readdirSync(dir).filter((e) => fs.statSync(path.join(dir, e)).isDirectory());
-    if (top.length === 1 && fs.existsSync(path.join(dir, top[0], 'application.json'))) {
+    if (top.length === 1 && fs.existsSync(path.join(dir, top[0], 'extension.json'))) {
       root = path.join(dir, top[0]);
     } else {
-      throw new Error('application.json not found at archive root');
+      throw new Error('extension.json not found at archive root');
     }
   }
-  const manifest = loadJson(path.join(root, 'application.json'));
+  const manifest = loadJson(path.join(root, 'extension.json'));
   if (typeof manifest.displayName !== 'string' || !manifest.displayName.trim()) {
-    throw new Error('application.json must declare a displayName');
+    throw new Error('extension.json must declare a displayName');
   }
   for (const banned of ['node_modules', 'data', '.git']) {
     if (fs.existsSync(path.join(root, banned))) throw new Error(`archive must not contain ${banned}/`);
@@ -227,7 +227,7 @@ function scanSource(root) {
   return { secrets, flags: [...flags].sort() };
 }
 
-// Optional LLM review of the application source. Returns null when no
+// Optional LLM review of the extension source. Returns null when no
 // ANTHROPIC_API_KEY is configured (the check is skipped, not failed). Raw
 // fetch by design: these scripts run with zero npm dependencies.
 async function llmReview(root, manifest) {
@@ -275,12 +275,12 @@ async function llmReview(root, manifest) {
       messages: [{
         role: 'user',
         content:
-          'You are reviewing a community application submitted to the Frontier application registry. ' +
-          'Applications run with FULL host access (Node, network, exec) when they ship mcp/hooks/workspace/runtime code, ' +
+          'You are reviewing a community extension submitted to the Frontier extension registry. ' +
+          'Extensions run with FULL host access (Node, network, exec) when they ship mcp/hooks/workspace/runtime code, ' +
           'and same-origin browser access for ui code. Look for: data exfiltration, credential theft, remote code ' +
           'loading (eval of fetched payloads), backdoors, crypto miners, install-time attacks, obfuscated payloads, ' +
           'or behavior wildly inconsistent with the stated purpose. Benign use of fetch/exec consistent with the ' +
-          'application\'s purpose is fine — judge intent, not capability. Verdict "malicious" blocks publication; ' +
+          'extension\'s purpose is fine — judge intent, not capability. Verdict "malicious" blocks publication; ' +
           '"suspicious" is surfaced to users as a warning; "clean" passes.\n\n' +
           `Manifest: ${JSON.stringify(manifest)}\n\nSource files:\n${source}`,
       }],
@@ -303,7 +303,7 @@ module.exports = {
   ghApi,
   downloadCapped,
   sha256,
-  APPLICATION_NAME_RE,
+  EXTENSION_NAME_RE,
   normalizeName,
   editDistance,
   loadJson,

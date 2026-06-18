@@ -1,7 +1,7 @@
 'use strict';
 // Remove a listing — the unpublish lever. The listing is the source of truth
 // for `index.json`, so deleting listings/<owner>/<name>.json delists the
-// application on the next rebuild. This only edits the listing file; the source
+// extension on the next rebuild. This only edits the listing file; the source
 // repo and its releases are untouched. To stop a specific compromised VERSION
 // reaching machines, use blocklist.json (the kill switch), not this. See
 // PUBLISHING.md → "Unpublishing and republishing".
@@ -44,5 +44,5 @@ console.log(`  ${rel}`);
 console.log(`  ${JSON.stringify({ repo: repo || `${owner}/<repo>` })}`);
 console.log('');
 console.log('Then commit and open a PR (the namespace owner or a public org member).');
-console.log('Note: this is a whole-application switch. To pull a single bad VERSION,');
+console.log('Note: this is a whole-extension switch. To pull a single bad VERSION,');
 console.log('use blocklist.json (admin-only) — see PUBLISHING.md.');

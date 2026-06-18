@@ -36,7 +36,7 @@ function loadExistingIndex() {
   try {
     return JSON.parse(fs.readFileSync(INDEX_PATH, 'utf-8'));
   } catch {
-    return { schema: 1, applications: [] };
+    return { schema: 1, extensions: [] };
   }
 }
 
@@ -44,7 +44,7 @@ async function processListing(listing, prior, blocklist) {
   // Deep-copy the prior entry: it lives inside `existing`, and mutating it in
   // place would make the end-of-run "did anything change?" diff compare the
   // already-mutated existing against the new index — so newly accepted
-  // versions of an already-listed application would never get written.
+  // versions of an already-listed extension would never get written.
   const entry = prior
     ? JSON.parse(JSON.stringify(prior))
     : {
@@ -140,26 +140,26 @@ async function processListing(listing, prior, blocklist) {
 async function main() {
   const listings = loadListings(REPO_ROOT);
   const blocklist = loadBlocklist(REPO_ROOT);
-  const blockedIds = new Set(blocklist.applications.map((e) => (typeof e === 'string' ? e : e.id)));
+  const blockedIds = new Set(blocklist.extensions.map((e) => (typeof e === 'string' ? e : e.id)));
   const blockedPublishers = new Set(blocklist.publishers.map((p) => (typeof p === 'string' ? p : p.owner)));
   const existing = loadExistingIndex();
-  const priorById = new Map(existing.applications.map((e) => [e.id, e]));
+  const priorById = new Map(existing.extensions.map((e) => [e.id, e]));
 
-  const applications = [];
+  const extensions = [];
   for (const listing of listings) {
     if (blockedIds.has(listing.id) || blockedPublishers.has(listing.owner)) {
       console.error(`[index] ${listing.id}: blocklisted — excluded from index`);
       continue;
     }
-    applications.push(await processListing(listing, priorById.get(listing.id), blocklist));
+    extensions.push(await processListing(listing, priorById.get(listing.id), blocklist));
   }
-  applications.sort((a, b) => a.id.localeCompare(b.id));
+  extensions.sort((a, b) => a.id.localeCompare(b.id));
 
   const index = {
     schema: 1,
-    registry: 'frontierengineer/applications',
+    registry: 'frontierengineer/extensions',
     generated: new Date().toISOString(),
-    applications: applications.filter((e) => e.versions.length > 0 || e.rejected.length > 0),
+    extensions: extensions.filter((e) => e.versions.length > 0 || e.rejected.length > 0),
   };
 
   // `generated` means "when the content last changed", not "when the scan
@@ -168,11 +168,11 @@ async function main() {
   // doesn't accrete a no-op commit every scan interval.
   const stripGenerated = (i) => JSON.stringify({ ...i, generated: undefined });
   if (stripGenerated(existing) === stripGenerated(index)) {
-    console.error(`[index] unchanged (${index.applications.length} application(s)) — not rewriting index.json`);
+    console.error(`[index] unchanged (${index.extensions.length} extension(s)) — not rewriting index.json`);
     return;
   }
   fs.writeFileSync(INDEX_PATH, JSON.stringify(index, null, 2) + '\n');
-  console.error(`[index] wrote ${index.applications.length} application(s) to index.json`);
+  console.error(`[index] wrote ${index.extensions.length} extension(s) to index.json`);
 }
 
 main().catch((err) => {
