@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-16T03:47:00.939Z",
+  "generated": "2026-06-20T02:32:46.890Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -151,6 +151,42 @@
       "dependencies": 2,
       "networkHosts": [],
       "latest": "2.0.0"
+    },
+    {
+      "id": "frontierengineer/mercurial",
+      "owner": "frontierengineer",
+      "name": "mercurial",
+      "repo": "frontierengineer/extension-mercurial",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "tarball": "https://github.com/frontierengineer/extension-mercurial/releases/download/v1.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-mercurial/releases/assets/452669686",
+          "sha256": "0201ad98cae34c345b796d33ad539de82b4358b60fde674e3e230e52b099dabc",
+          "size": 19093,
+          "publishedAt": "2026-06-20T02:32:05Z",
+          "scannedAt": "2026-06-20T02:32:46.875Z",
+          "flags": []
+        }
+      ],
+      "rejected": [],
+      "repoUrl": "https://github.com/frontierengineer/extension-mercurial",
+      "stars": 0,
+      "displayName": "Mercurial",
+      "description": "Mercurial support: a workspace provider that runs each reservation in place (committing on release), plus a source-control panel showing a slot's changes, diffs, and log.",
+      "defaultColor": "#999999",
+      "capabilities": {
+        "ui": true,
+        "mcp": false,
+        "hooks": false,
+        "workspace": true,
+        "runtime": false
+      },
+      "serverCode": true,
+      "dependencies": 2,
+      "networkHosts": [],
+      "latest": "1.0.0"
     }
   ]
 }
