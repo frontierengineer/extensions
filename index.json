@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-26T13:05:37.730Z",
+  "generated": "2026-06-26T13:20:48.868Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -57,6 +57,17 @@
       "repo": "frontierengineer/extension-directory-sync",
       "versions": [
         {
+          "version": "2.0.1",
+          "tag": "v2.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-directory-sync/releases/download/v2.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-directory-sync/releases/assets/458656410",
+          "sha256": "1942177a4fc39cd0783237986ca48b14c615474024037faa41bee74eee5bc68e",
+          "size": 19395,
+          "publishedAt": "2026-06-26T13:19:22Z",
+          "scannedAt": "2026-06-26T13:20:45.790Z",
+          "flags": []
+        },
+        {
           "version": "2.0.0",
           "tag": "v2.0.0",
           "tarball": "https://github.com/frontierengineer/extension-directory-sync/releases/download/v2.0.0/extension.tgz",
@@ -84,7 +95,7 @@
       "serverCode": false,
       "dependencies": 2,
       "networkHosts": [],
-      "latest": "2.0.0"
+      "latest": "2.0.1"
     },
     {
       "id": "frontierengineer/games",
@@ -195,6 +206,17 @@
       "repo": "frontierengineer/extension-mercurial",
       "versions": [
         {
+          "version": "2.0.0",
+          "tag": "v2.0.0",
+          "tarball": "https://github.com/frontierengineer/extension-mercurial/releases/download/v2.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-mercurial/releases/assets/458656786",
+          "sha256": "cb03156c8380af1fdd658b1aa154ea00c39433a5f55dc488c726a34c15efe4f2",
+          "size": 20396,
+          "publishedAt": "2026-06-26T13:20:06Z",
+          "scannedAt": "2026-06-26T13:20:48.152Z",
+          "flags": []
+        },
+        {
           "version": "1.0.0",
           "tag": "v1.0.0",
           "tarball": "https://github.com/frontierengineer/extension-mercurial/releases/download/v1.0.0/extension.tgz",
@@ -222,7 +244,7 @@
       "serverCode": true,
       "dependencies": 2,
       "networkHosts": [],
-      "latest": "1.0.0"
+      "latest": "2.0.0"
     },
     {
       "id": "frontierengineer/terminal",
