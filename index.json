@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-26T13:03:13.978Z",
+  "generated": "2026-06-26T13:05:37.730Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -148,6 +148,17 @@
       "repo": "frontierengineer/extension-hello-world",
       "versions": [
         {
+          "version": "2.0.1",
+          "tag": "v2.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v2.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/458646808",
+          "sha256": "92243e77a29c54adf9c26b5f31995f14604400cdabc63a384d969aac42810cdc",
+          "size": 18906,
+          "publishedAt": "2026-06-26T13:05:05Z",
+          "scannedAt": "2026-06-26T13:05:36.765Z",
+          "flags": []
+        },
+        {
           "version": "2.0.0",
           "tag": "v2.0.0",
           "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v2.0.0/extension.tgz",
@@ -163,19 +174,19 @@
       "repoUrl": "https://github.com/frontierengineer/extension-hello-world",
       "stars": 0,
       "displayName": "Hello World",
-      "description": "The reference Frontier extension — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, Hooks, and the worker-channel fan-out.",
+      "description": "The reference Frontier extension — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, and the worker-channel fan-out.",
       "defaultColor": "#14b8a6",
       "capabilities": {
         "ui": true,
         "mcp": true,
-        "hooks": true,
+        "hooks": false,
         "workspace": false,
         "runtime": false
       },
       "serverCode": true,
       "dependencies": 2,
       "networkHosts": [],
-      "latest": "2.0.0"
+      "latest": "2.0.1"
     },
     {
       "id": "frontierengineer/mercurial",
