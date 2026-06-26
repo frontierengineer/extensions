@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-20T02:32:46.890Z",
+  "generated": "2026-06-26T12:51:11.569Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -9,6 +9,17 @@
       "name": "canvas",
       "repo": "frontierengineer/extension-canvas",
       "versions": [
+        {
+          "version": "2.0.1",
+          "tag": "v2.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-canvas/releases/download/v2.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-canvas/releases/assets/458636119",
+          "sha256": "77686981f15d489ee036316b6aaf43ce712a7c07ba62e187fd7da7b1d3a6b92f",
+          "size": 20210,
+          "publishedAt": "2026-06-26T12:50:20Z",
+          "scannedAt": "2026-06-26T12:51:09.019Z",
+          "flags": []
+        },
         {
           "version": "2.0.0",
           "tag": "v2.0.0",
@@ -37,7 +48,7 @@
       "serverCode": false,
       "dependencies": 3,
       "networkHosts": [],
-      "latest": "2.0.0"
+      "latest": "2.0.1"
     },
     {
       "id": "frontierengineer/directory-sync",
