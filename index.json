@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-26T12:51:11.569Z",
+  "generated": "2026-06-26T12:59:32.702Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -93,6 +93,20 @@
       "repo": "frontierengineer/extension-games",
       "versions": [
         {
+          "version": "2.0.1",
+          "tag": "v2.0.1",
+          "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v2.0.1/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-games/releases/assets/458641802",
+          "sha256": "d7ff20e93d9705f9fe409dce47d72da44b4773bdc2d54b713ba2cb77e4712183",
+          "size": 22014,
+          "publishedAt": "2026-06-26T12:58:59Z",
+          "scannedAt": "2026-06-26T12:59:31.736Z",
+          "flags": [
+            "obfuscation indicators (base64 decode + exec)",
+            "outbound network calls (fetch / http)"
+          ]
+        },
+        {
           "version": "2.0.0",
           "tag": "v2.0.0",
           "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v2.0.0/extension.tgz",
@@ -125,7 +139,7 @@
       "networkHosts": [
         "archive.org"
       ],
-      "latest": "2.0.0"
+      "latest": "2.0.1"
     },
     {
       "id": "frontierengineer/hello-world",
