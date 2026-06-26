@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-26T12:59:32.702Z",
+  "generated": "2026-06-26T13:03:13.978Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -210,6 +210,45 @@
       },
       "serverCode": true,
       "dependencies": 2,
+      "networkHosts": [],
+      "latest": "1.0.0"
+    },
+    {
+      "id": "frontierengineer/terminal",
+      "owner": "frontierengineer",
+      "name": "terminal",
+      "repo": "frontierengineer/extension-terminal",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "tarball": "https://github.com/frontierengineer/extension-terminal/releases/download/v1.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-terminal/releases/assets/458644414",
+          "sha256": "9cf98d75afff74817ca3023c0dde437fc91267526779812568d4d1dadbb8a370",
+          "size": 30616,
+          "publishedAt": "2026-06-26T13:02:14Z",
+          "scannedAt": "2026-06-26T13:03:13.959Z",
+          "flags": [
+            "reads environment variables",
+            "spawns processes (child_process)"
+          ]
+        }
+      ],
+      "rejected": [],
+      "repoUrl": "https://github.com/frontierengineer/extension-terminal",
+      "stars": 0,
+      "displayName": "Terminal",
+      "description": "An integrated xterm terminal in the bottom panel with a target tree, dropping into a shell on the host, any connected machine, or a reservation's working directory.",
+      "defaultColor": "#22d3ee",
+      "capabilities": {
+        "ui": true,
+        "mcp": false,
+        "hooks": false,
+        "workspace": false,
+        "runtime": false
+      },
+      "serverCode": false,
+      "dependencies": 5,
       "networkHosts": [],
       "latest": "1.0.0"
     }
