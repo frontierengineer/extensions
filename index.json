@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-06-26T20:17:47.804Z",
+  "generated": "2026-07-02T21:24:05.659Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -71,6 +71,45 @@
       "dependencies": 3,
       "networkHosts": [],
       "latest": "2.0.3"
+    },
+    {
+      "id": "frontierengineer/cursor",
+      "owner": "frontierengineer",
+      "name": "cursor",
+      "repo": "frontierengineer/extension-cursor",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "tag": "v1.0.0",
+          "tarball": "https://github.com/frontierengineer/extension-cursor/releases/download/v1.0.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-cursor/releases/assets/464723574",
+          "sha256": "740ac29c3955f73ff8d2ec6d72e0347527ce0dcf0d20570dfdbad797672bf5f8",
+          "size": 16959,
+          "publishedAt": "2026-07-02T21:22:53Z",
+          "scannedAt": "2026-07-02T21:24:02.535Z",
+          "flags": [
+            "reads environment variables",
+            "spawns processes (child_process)"
+          ]
+        }
+      ],
+      "rejected": [],
+      "repoUrl": "https://github.com/frontierengineer/extension-cursor",
+      "stars": 0,
+      "displayName": "Cursor",
+      "description": "Worker runtime that drives Cursor's headless CLI agent (`cursor-agent -p`) on a slot and relays its NDJSON event stream as transcript events, so any model Cursor exposes (Anthropic, OpenAI, Gemini, xAI, Composer) runs in Frontier's UI. Operates in place on the slot's existing checkout.",
+      "defaultColor": "#000000",
+      "capabilities": {
+        "ui": false,
+        "mcp": false,
+        "hooks": false,
+        "workspace": false,
+        "runtime": true
+      },
+      "serverCode": true,
+      "dependencies": 0,
+      "networkHosts": [],
+      "latest": "1.0.0"
     },
     {
       "id": "frontierengineer/directory-sync",
