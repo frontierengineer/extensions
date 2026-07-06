@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-07-02T21:24:05.659Z",
+  "generated": "2026-07-06T20:40:23.488Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -110,53 +110,6 @@
       "dependencies": 0,
       "networkHosts": [],
       "latest": "1.0.0"
-    },
-    {
-      "id": "frontierengineer/directory-sync",
-      "owner": "frontierengineer",
-      "name": "directory-sync",
-      "repo": "frontierengineer/extension-directory-sync",
-      "versions": [
-        {
-          "version": "2.0.1",
-          "tag": "v2.0.1",
-          "tarball": "https://github.com/frontierengineer/extension-directory-sync/releases/download/v2.0.1/extension.tgz",
-          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-directory-sync/releases/assets/458656410",
-          "sha256": "1942177a4fc39cd0783237986ca48b14c615474024037faa41bee74eee5bc68e",
-          "size": 19395,
-          "publishedAt": "2026-06-26T13:19:22Z",
-          "scannedAt": "2026-06-26T13:20:45.790Z",
-          "flags": []
-        },
-        {
-          "version": "2.0.0",
-          "tag": "v2.0.0",
-          "tarball": "https://github.com/frontierengineer/extension-directory-sync/releases/download/v2.0.0/extension.tgz",
-          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-directory-sync/releases/assets/448815830",
-          "sha256": "44cde45d606c81e0bfe4bbfdc9303ae9a1b4f2b5f19e87e9fbe22776c5722bc1",
-          "size": 19213,
-          "publishedAt": "2026-06-16T03:41:10Z",
-          "scannedAt": "2026-06-16T03:46:58.704Z",
-          "flags": []
-        }
-      ],
-      "rejected": [],
-      "repoUrl": "https://github.com/frontierengineer/extension-directory-sync",
-      "stars": 0,
-      "displayName": "Directory Sync",
-      "description": "One-way mirrors between directories on your machines: each pair scans its source on an interval (or on demand) and copies changes to the target, deleting target files the source no longer has.",
-      "defaultColor": "#f59e0b",
-      "capabilities": {
-        "ui": true,
-        "mcp": false,
-        "hooks": false,
-        "workspace": false,
-        "runtime": false
-      },
-      "serverCode": false,
-      "dependencies": 2,
-      "networkHosts": [],
-      "latest": "2.0.1"
     },
     {
       "id": "frontierengineer/games",
