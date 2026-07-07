@@ -15,8 +15,8 @@ Repo layout = extension layout (the same tree Frontier runs from
 ```
 extension.json      required: {"displayName": "...", "defaultColor": "#rrggbb", "description": "..."}
                       optional:  "network": {"allowedHosts": ["api.example.com"]}  — declares outbound fetch targets
-ui/index.tsx          browser UI capability (optional)
-ui/package.json       its deps (optional — fewer is better, zero is best)
+surface/index.tsx     browser surface capability (optional)
+surface/package.json  its deps (optional — fewer is better, zero is best)
 mcp/index.ts          host-side MCP tools (optional — full host access)
 hooks/index.ts        host-side hooks (optional — full host access)
 workspace/index.ts    workspace provider (optional — full host access)
