@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "registry": "frontierengineer/extensions",
-  "generated": "2026-07-06T20:40:23.488Z",
+  "generated": "2026-07-09T00:26:44.627Z",
   "extensions": [
     {
       "id": "frontierengineer/canvas",
@@ -9,6 +9,17 @@
       "name": "canvas",
       "repo": "frontierengineer/extension-canvas",
       "versions": [
+        {
+          "version": "2.1.0",
+          "tag": "v2.1.0",
+          "tarball": "https://github.com/frontierengineer/extension-canvas/releases/download/v2.1.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-canvas/releases/assets/470831024",
+          "sha256": "cef9ceb1f3c6b0256474c4c5d1bee9617ea010ee8d6b7c2cab06c78048d0287b",
+          "size": 21587,
+          "publishedAt": "2026-07-09T00:23:38Z",
+          "scannedAt": "2026-07-09T00:26:39.692Z",
+          "flags": []
+        },
         {
           "version": "2.0.3",
           "tag": "v2.0.3",
@@ -61,16 +72,16 @@
       "description": "An infinite zoomable whiteboard of draggable post-its and colored areas for spatial planning and freeform notes.",
       "defaultColor": "#6366f1",
       "capabilities": {
-        "ui": true,
+        "ui": false,
         "mcp": false,
         "hooks": false,
         "workspace": false,
         "runtime": false
       },
       "serverCode": false,
-      "dependencies": 3,
+      "dependencies": 0,
       "networkHosts": [],
-      "latest": "2.0.3"
+      "latest": "2.1.0"
     },
     {
       "id": "frontierengineer/cursor",
@@ -118,6 +129,20 @@
       "repo": "frontierengineer/extension-games",
       "versions": [
         {
+          "version": "2.1.0",
+          "tag": "v2.1.0",
+          "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v2.1.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-games/releases/assets/470831041",
+          "sha256": "4c1d1bb9675f20def8a388790fa3f7543e483f71cd12d7ca68fa27787e42ebf0",
+          "size": 22210,
+          "publishedAt": "2026-07-09T00:23:39Z",
+          "scannedAt": "2026-07-09T00:26:41.498Z",
+          "flags": [
+            "obfuscation indicators (base64 decode + exec)",
+            "outbound network calls (fetch / http)"
+          ]
+        },
+        {
           "version": "2.0.1",
           "tag": "v2.0.1",
           "tarball": "https://github.com/frontierengineer/extension-games/releases/download/v2.0.1/extension.tgz",
@@ -153,18 +178,18 @@
       "description": "A retro console emulator (via EmulatorJS) that browses archive.org ROM catalogs and plays games in-browser, including your own ROMs.",
       "defaultColor": "#ef4444",
       "capabilities": {
-        "ui": true,
+        "ui": false,
         "mcp": true,
         "hooks": false,
         "workspace": false,
         "runtime": false
       },
       "serverCode": true,
-      "dependencies": 3,
+      "dependencies": 0,
       "networkHosts": [
         "archive.org"
       ],
-      "latest": "2.0.1"
+      "latest": "2.1.0"
     },
     {
       "id": "frontierengineer/hello-world",
@@ -172,6 +197,17 @@
       "name": "hello-world",
       "repo": "frontierengineer/extension-hello-world",
       "versions": [
+        {
+          "version": "2.1.0",
+          "tag": "v2.1.0",
+          "tarball": "https://github.com/frontierengineer/extension-hello-world/releases/download/v2.1.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-hello-world/releases/assets/470831063",
+          "sha256": "a596226de6a83859593fad12658173fdc9baf02eab181da2cee8657daeaa2566",
+          "size": 19232,
+          "publishedAt": "2026-07-09T00:23:43Z",
+          "scannedAt": "2026-07-09T00:26:42.494Z",
+          "flags": []
+        },
         {
           "version": "2.0.1",
           "tag": "v2.0.1",
@@ -202,16 +238,16 @@
       "description": "The reference Frontier extension — one small, heavily-commented example of every capability: server, worker, ui, bus (private/public), Store, Config, MCP, Scheduler, and the worker-channel fan-out.",
       "defaultColor": "#14b8a6",
       "capabilities": {
-        "ui": true,
+        "ui": false,
         "mcp": true,
         "hooks": false,
         "workspace": false,
         "runtime": false
       },
       "serverCode": true,
-      "dependencies": 2,
+      "dependencies": 0,
       "networkHosts": [],
-      "latest": "2.0.1"
+      "latest": "2.1.0"
     },
     {
       "id": "frontierengineer/mercurial",
@@ -219,6 +255,17 @@
       "name": "mercurial",
       "repo": "frontierengineer/extension-mercurial",
       "versions": [
+        {
+          "version": "2.1.0",
+          "tag": "v2.1.0",
+          "tarball": "https://github.com/frontierengineer/extension-mercurial/releases/download/v2.1.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-mercurial/releases/assets/470831070",
+          "sha256": "d341039d88bb632a194e1692f25b5e12189596287caa783bb8419fcfe83eeb78",
+          "size": 20775,
+          "publishedAt": "2026-07-09T00:23:44Z",
+          "scannedAt": "2026-07-09T00:26:43.505Z",
+          "flags": []
+        },
         {
           "version": "2.0.0",
           "tag": "v2.0.0",
@@ -249,16 +296,16 @@
       "description": "Mercurial support: a workspace provider that runs each reservation in place (committing on release), plus a source-control panel showing a slot's changes, diffs, and log.",
       "defaultColor": "#999999",
       "capabilities": {
-        "ui": true,
+        "ui": false,
         "mcp": false,
         "hooks": false,
         "workspace": true,
         "runtime": false
       },
       "serverCode": true,
-      "dependencies": 2,
+      "dependencies": 0,
       "networkHosts": [],
-      "latest": "2.0.0"
+      "latest": "2.1.0"
     },
     {
       "id": "frontierengineer/terminal",
@@ -266,6 +313,20 @@
       "name": "terminal",
       "repo": "frontierengineer/extension-terminal",
       "versions": [
+        {
+          "version": "1.1.0",
+          "tag": "v1.1.0",
+          "tarball": "https://github.com/frontierengineer/extension-terminal/releases/download/v1.1.0/extension.tgz",
+          "assetApiUrl": "https://api.github.com/repos/frontierengineer/extension-terminal/releases/assets/470831095",
+          "sha256": "fb24a6d8263486229a48616373cd728a44db6f25802f487cd811164c6afd727c",
+          "size": 30796,
+          "publishedAt": "2026-07-09T00:23:48Z",
+          "scannedAt": "2026-07-09T00:26:44.598Z",
+          "flags": [
+            "reads environment variables",
+            "spawns processes (child_process)"
+          ]
+        },
         {
           "version": "1.0.0",
           "tag": "v1.0.0",
@@ -288,16 +349,16 @@
       "description": "An integrated xterm terminal in the bottom panel with a target tree, dropping into a shell on the host, any connected machine, or a reservation's working directory.",
       "defaultColor": "#22d3ee",
       "capabilities": {
-        "ui": true,
+        "ui": false,
         "mcp": false,
         "hooks": false,
         "workspace": false,
         "runtime": false
       },
       "serverCode": false,
-      "dependencies": 5,
+      "dependencies": 0,
       "networkHosts": [],
-      "latest": "1.0.0"
+      "latest": "1.1.0"
     }
   ]
 }
