@@ -17,6 +17,8 @@ on:
 
 permissions:
   contents: write
+  # Lets the seed step create the `agent-rating` label and rating issues.
+  issues: write
 
 concurrency:
   group: agents-index
@@ -30,6 +32,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: Seed rating scaffolding (label + issues)
+        # Idempotent and best-effort: create the `agent-rating` label if missing
+        # and open a rating issue for any agent that lacks one, so votes work
+        # from day one with no manual maintainer step. Never fails the build.
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/seed-agent-ratings.js
 
       - name: Build agent index
         env:
