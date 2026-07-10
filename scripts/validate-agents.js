@@ -3,12 +3,25 @@
 // TRUSTED scripts from the base branch; the PR's content is only read as data
 // (JSON files in a separate checkout), never executed.
 //
-// A PR that changes only agents/catalog/<your-namespace>/*.json and passes the
-// schema + ownership checks is auto-merged — no human in the loop, the same
-// open model as extension listings. An agent is plain text with no code path,
-// so there is no tarball to scan: the checks are schema, size, and namespace
-// ownership. An optional LLM review (enabled by ANTHROPIC_API_KEY) blocks a
-// clearly-malicious system prompt, mirroring the extension scan's llmReview.
+// An agent body is an executable system prompt: users install it and run it
+// against their own code with the tools they already granted. It IS the
+// payload, so it is never safe to publish on schema checks alone — the way the
+// marketplace never publishes extension code without scanning it. This
+// validator therefore has three outcomes, not two:
+//
+//   - FAIL (exit non-zero): a schema/size/ownership violation, or a prompt the
+//     safety review flagged as malicious. The PR stays open with the reason.
+//   - AUTO-MERGE (automerge=true): every added/edited agent passed schema AND
+//     was cleared by the prompt-safety review. This is the only path that
+//     merges with no human in the loop.
+//   - HOLD (automerge=false): schema/ownership passed, but the prompt-safety
+//     review could not clear the content — it did not run (no ANTHROPIC_API_KEY
+//     / API unreachable) or returned "suspicious". We fail CLOSED: hold the PR
+//     for a human maintainer rather than auto-merge an unreviewed prompt.
+//
+// The automerge/hold decision is written to $GITHUB_OUTPUT so the workflow can
+// gate its merge step on it. Absent a review key, nothing auto-merges — that is
+// the intended posture, not a bug: configure the key for hands-off merges.
 //
 //   node scripts/validate-agents.js --pr-dir <checkout> --author <login>
 
@@ -22,6 +35,15 @@ const CATALOG_RE = /^agents\/catalog\/([^/]+)\/([^/]+)\.json$/;
 function fail(msg) {
   console.error(`FAIL: ${msg}`);
   process.exit(1);
+}
+
+// Append a step output for the workflow to read. Multi-line-safe (heredoc
+// delimiter). No-op when run outside Actions (local invocation).
+function writeOutput(key, value) {
+  const out = process.env.GITHUB_OUTPUT;
+  if (!out) return;
+  const delim = `EOF_${key}_${Date.now()}`;
+  fs.appendFileSync(out, `${key}<<${delim}\n${value}\n${delim}\n`);
 }
 
 async function isPublicOrgMember(org, user) {
@@ -102,6 +124,10 @@ async function main() {
 
   if (changed.length === 0 && deleted.length === 0) fail('PR changes no files');
 
+  // Reasons an added/edited agent could not be cleared for auto-merge. Any
+  // entry here flips the PR to HOLD-for-human instead of auto-merge.
+  const holdForHuman = new Set();
+
   // Auto-merge applies ONLY to catalog files. Anything else (scripts, index,
   // workflows, README) needs a human — fail so it stays open.
   for (const f of [...changed, ...deleted]) {
@@ -144,16 +170,30 @@ async function main() {
     if (errs.length) fail(`${id}:\n  - ${errs.join('\n  - ')}`);
 
     const review = await llmReviewAgent(def, id);
-    if (review?.verdict === 'malicious') {
+    if (review === null) {
+      // The prompt-safety review produced no verdict (no ANTHROPIC_API_KEY, or
+      // the API was unreachable). The body is an executable prompt, so we do
+      // NOT merge it unreviewed — hold for a human instead of failing open.
+      holdForHuman.add(`${id}: automated prompt-safety review did not run (no reviewer configured or the review API was unreachable)`);
+    } else if (review.verdict === 'malicious') {
       fail(`${id}: automated review flagged the system prompt as malicious — ${review.reasons.join('; ')}`);
-    }
-    if (review?.verdict === 'suspicious') {
-      console.error(`WARN: ${id}: automated review flagged as suspicious — ${review.reasons.join('; ')}`);
+    } else if (review.verdict === 'suspicious') {
+      holdForHuman.add(`${id}: automated review flagged the prompt as suspicious — ${review.reasons.join('; ')}`);
     }
     console.error(`OK: ${id}`);
   }
 
-  console.error('All checks passed.');
+  // Auto-merge only when nothing needs a human. A pure delisting (deletes only,
+  // no added/edited bodies) has no prompt to review and stays auto-mergeable.
+  const automerge = holdForHuman.size === 0;
+  writeOutput('automerge', automerge ? 'true' : 'false');
+  if (automerge) {
+    console.error('All checks passed — eligible for auto-merge.');
+  } else {
+    const reason = [...holdForHuman].join('\n  - ');
+    writeOutput('hold_reason', reason);
+    console.error(`HOLD: schema and ownership passed, but this PR needs a human before merge:\n  - ${reason}`);
+  }
 }
 
 main().catch((err) => fail(err.message));
