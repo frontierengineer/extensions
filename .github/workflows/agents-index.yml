@@ -14,6 +14,7 @@ on:
       - 'agents/catalog/**'
       - 'scripts/build-agents-index.js'
       - 'scripts/agents-lib.js'
+      - 'scripts/seed-agent-ratings.js'
 
 permissions:
   contents: write
