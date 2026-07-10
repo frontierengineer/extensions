@@ -1,0 +1,60 @@
+# Rebuild agents/index.json: validate every agent-catalog file, stamp its
+# id/author from the path, and refresh community vote counts from the
+# `agent-rating` issues. Runs after every agents/catalog change and on a
+# schedule so new 👍 reactions surface without a code change.
+name: agents-index
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/catalog/**'
+      - 'scripts/build-agents-index.js'
+      - 'scripts/agents-lib.js'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: agents-index
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build agent index
+        env:
+          # Reads this repo's `agent-rating` issues to count 👍 votes. The
+          # default token is fine (same-repo reads); votes are best-effort, so
+          # a rate limit just omits counts rather than failing.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-agents-index.js
+
+      - name: Commit index
+        run: |
+          if git diff --quiet agents/index.json; then
+            echo "agent index unchanged"
+            exit 0
+          fi
+          git config user.name "frontier-registry-bot"
+          git config user.email "registry@frontierengineer.com"
+          git add agents/index.json
+          git commit -m "agents: rebuild index"
+          # Concurrent runs (schedule + push + dispatch) can race on push;
+          # rebase onto whatever landed first, prefer our fresh index, retry.
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase -X ours origin main || git rebase --abort
+            sleep $((attempt * 3))
+          done
+          echo "agent index push lost the race after retries; the next run will reconcile"
+          exit 0

@@ -1,24 +1,23 @@
-# Open submission, no human gate: a listing PR that passes mechanical
+# Open submission, no human gate: an agent-catalog PR that passes mechanical
 # validation is merged automatically. pull_request_target is required so the
-# job has write permissions on fork PRs — and is safe here because ONLY the
-# base branch's scripts are executed; the PR checkout is read as data.
-name: validate-listing
+# job has write permissions on fork PRs — safe here because ONLY the base
+# branch's scripts run; the PR checkout is read as data. The `paths` filter
+# keeps this off PRs that don't touch the agent catalog (extension-listing PRs
+# are handled by validate-listing.yml).
+name: validate-agents
 
 on:
   pull_request_target:
     types: [opened, synchronize, reopened]
-    # Scoped to listing PRs so agent-catalog PRs (validate-agents.yml) don't
-    # also trip this validator. A PR touching neither listings/ nor
-    # agents/catalog/ runs no auto-merge job and stays open for manual review.
     paths:
-      - 'listings/**'
+      - 'agents/catalog/**'
 
 permissions:
   contents: write
   pull-requests: write
 
 concurrency:
-  group: validate-${{ github.event.pull_request.number }}
+  group: validate-agents-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
@@ -41,20 +40,22 @@ jobs:
         with:
           node-version: 22
 
-      - name: Validate listing
+      - name: Validate agents
         id: validate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/validate-listing.js --pr-dir pr --author "${{ github.event.pull_request.user.login }}"
+          # Optional: enables the LLM review pass on each submitted prompt.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/validate-agents.js --pr-dir pr --author "${{ github.event.pull_request.user.login }}"
 
       - name: Auto-merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr merge ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --squash
-          # Merges by GITHUB_TOKEN don't fire push-triggered workflows, so
-          # kick the indexer explicitly to pick up the new listing.
-          gh workflow run index.yml --repo ${{ github.repository }}
+          # Merges by GITHUB_TOKEN don't fire push-triggered workflows, so kick
+          # the index build explicitly to pick up the new agent.
+          gh workflow run agents-index.yml --repo ${{ github.repository }}
 
       - name: Explain failure
         if: failure()
